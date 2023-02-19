@@ -1,4 +1,3 @@
-% IHCP2d.m && being Used
 % This is a 2D Heat Conduction Program for calculation of heat flux q2
 % boundary condition. Firstly, a  Guess Heat Flux will apply on the hot
 % side of computation area, where is correspond to the Mold Hot Surface.
@@ -7,7 +6,7 @@
 %                | hot  .       | cold
 %                |      .       |
 %                |      .       |
-%            q2  | -3-  .       | Td
+%          q2?   | -3-  .       | Td
 %                |      .       |
 %                |      .       |
 %                | face .       | face
@@ -15,9 +14,15 @@
 %        j=1     ----------------
 %               i=1     q3      i=nx
 % 2022/7/3
-% s = sum_Fts_(Y -T)^2 + alpha*(q* - q)^2 + beta*(q*_k-1 - 2*q*_k + q*_k+1)^2
-% q* - estimated one at time interval [tj,tj+tr], q - cal., one at latest time step tj-1
+% The Inverse Problem can be represented as an optimization problem
+% the objective function
+%       s = sum_Fts_(Y -T)^2 + beta*||h_dq||^2
+% with partial differential equation (PDE) constraints
+%       ∂T/∂t=ΔT with  T=T0, -∂T/∂n = q and T(Γ_4,t)=f(t)
+% q - estimated one at time interval [tj,tj+tr], q - cal., one at latest time step tj-1
 % for the time interval [tj,tj+tr], the q* is a time-independent and spatial-dependent varible.
+% α - the regularization parameter (>0)
+% h_d - dth-order derivative operator
 % TcNumLoc_nznx - fetch the numeric loction for both cold side TC and RspTC.
 % MatPropAreaDis - Material Property , calculated domain size and its discrete
 % LoadTCdata - read tc data and Fs
