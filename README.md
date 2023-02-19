@@ -1,7 +1,7 @@
 Application
 -----------
 
-SRMbasedIHCP
+SRMbasedIP
 
 Description
 -----------   
