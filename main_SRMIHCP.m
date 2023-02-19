@@ -185,8 +185,7 @@ for id_order_spat_reg = 1  % 1:length(order_spatial_reg)
                     tic;
                     for kxls=1:tolTimeStep-Futuretime       % time squence kxls
                         CrtTime= Tsample(kxls,1);  % current time
-                        Q123 = zeros(nz2x,1);% nz2x*1 vector
-                        
+                        Q123 = zeros(nz2x,1);% nz2x*1 vector                        
                         itern=1;
                         maxRms=0.005;
                         
@@ -198,8 +197,7 @@ for id_order_spat_reg = 1  % 1:length(order_spatial_reg)
                             [CalTdFt,Timenow]=CNSolFourEquQ3(CrtTime,kxls,Futuretime,MolIntTemp,Q1,Q2,Q3);%CN
                             % Y-T
                             [ Y_T_nFts,Ytem,~] = resCalMea(kxls,Futuretime,Tsample,CalTdFt);
-                            DiffErr= norm(Y_T_nFts)/norm(Ytem);
-                            
+                            DiffErr= norm(Y_T_nFts)/norm(Ytem);                            
                             if itern <= maxIteration
                                 itern=itern+1;
                                 Q123 = Update3HeatFlux(kxls,Jacm,CalTdFt,Q123,Para0,regPi);
@@ -212,9 +210,7 @@ for id_order_spat_reg = 1  % 1:length(order_spatial_reg)
                         MolIntTemp=CalTdFt(:,:,1);
                         AllTemp(:,:,kxls)=CalTdFt(:,:,1);
                         DiffErr=10;
-                    end % end kxls time squence
-                    %                     disp(strcat(str ,' | Proceding:',num2str(kxls),'/',num2str(sm),' | maxit:',num2str(itern)));
-                    % Train_file_status=0;
+                    end % end kxls time squence                    
                     Lapsttime= toc;
                     
                 end % exist(file_name,'dir')
@@ -237,17 +233,15 @@ for id_order_spat_reg = 1  % 1:length(order_spatial_reg)
                     plot(TCsample(1:tolTimeStep-Futuretime,1),MHFQ2);
                     
                     title({str1;strcat('tol=', num2str(tol), ' ||Y-T||=',num2str(normResYT),...
-                        ' ||Lq||=',num2str(sqrt(squLq)),' regP*||Lq||^2=',num2str(regPi*squLq) ); strcat('Re_T=',num2str(100*normResYT/norm(Yture)),...
+                        ' ||Lq||=',num2str(sqrt(squLq)),' regP*||Lq||^2=',num2str(regPi*squLq) );...
+                        strcat('Re_T=',num2str(100*normResYT/norm(Yture)),...
                         '% Re_e_x_p=', num2str(100*tol/norm(Yture)) ,'%')});
                     grid on;
-                    %                     print(gcf,'-dpng',strcat(Train_file_values.Name,'\cost =',num2str(N2cost),'a','.png'));
                     print(gcf,'-dpng',strcat(photosfile_name,'\',file_name, '-norm(Y-T)=',num2str(normResYT),'.png'));
-                    %                     OnlinePost(N2cost,MHFQ2, AllTemp*Tmax_min+Tref,Train_file_values.Name,709,997,Fst);
                     disp(strcat(str1,', tol,', num2str(tol), ', ||Y-T||,',num2str(normResYT),...
                         ', ||Lq||,',num2str(sqrt(squLq)), ', Re_T,',num2str(100*normResYT/norm(Yture)),...
                         '%, Re_exp,', num2str(100*tol/norm(Yture)) ,'%,'  ,file_name   ));
                 end
-                
                 save(strcat(Train_file_values.Name,'\',file_name,'.mat'));
                 
             end % end beta loop
@@ -272,7 +266,7 @@ cwt(MHFQ2(709:997,31),Fst);
 figure(idx_Fig);
 xlim([TCsample(709,1)  TCsample(997,1)]);
 cwt(MHFQ2(:,31),seconds(1/Fst))
-%  y=Acos(ωt+φ)+h, and cycle T=2π/ω=1/f
+%  y=Acos(ωt+φ)+h with the cycle of T=2π/ω=1/f
 wcoherence(3*cos(2*pi*10/6*TCsample(1:tolTimeStep-Futuretime ,1)+ 60*pi/90),MHFQ2(:,31),Fst);
 % xlim([11  16.5])
 print(gcf,'-dpng',strcat(photosfile_name,'\','Fig.',num2str(idx_Fig-1),'.png'));
