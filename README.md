@@ -11,7 +11,7 @@ SRM for the determination of the heat flux using the observed temperatures.
 Written by:
 -----------
 
-Haihui Zhang (JXUST, China)
+Haihui Zhang (@江理JXUST, China)
                                 
 ---------------------------------
 
