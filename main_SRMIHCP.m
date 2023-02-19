@@ -18,7 +18,7 @@
 % the objective function
 %       s = sum_Fts_(Y -T)^2 + beta*||h_dq||^2
 % with partial differential equation (PDE) constraints
-%       ∂T/∂t=ΔT with  T=T0, -∂T/∂n = q and T(Γ_4,t)=f(t)
+%       ∂T/∂t=ΔT with  T=T0, -∂T/∂n = q and Td = f(t).
 % q - estimated one at time interval [tj,tj+tr], q - cal., one at latest time step tj-1
 % for the time interval [tj,tj+tr], the q* is a time-independent and spatial-dependent varible.
 % α - the regularization parameter (>0)
