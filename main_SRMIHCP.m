@@ -255,10 +255,10 @@ file_name =  strcat(dataName,'-nFts',num2str(6),...
     '-msh',num2str(msh),'-',spatial_reg,'-beta-',num2str(regPi));
 load(strcat(currentFolder,'\',file_name,'\',file_name,'.mat'));
 % close all
-[idx_Fig] = DrawFigures(normResYT,MHFQ2, AllTemp*Tmax_min+Tref,Train_file_values.Name,709,997,Fst);
-[idx_Fig] = TempHeatFluxContour(AllTemp*Tmax_min+Tref+273.15,TCCt,340,390,...
-    709,36,997,dx*Lref,dz*Lref,nz,nx,x2d*Lref,z2d*Lref,TCsample,idx_Fig);
-print(gcf,'-dpng',strcat(photosfile_name,'\','Fig.',num2str(idx_Fig-1),'.png'));
+% [idx_Fig] = DrawFigures(normResYT,MHFQ2, AllTemp*Tmax_min+Tref,Train_file_values.Name,709,997,Fst);
+% [idx_Fig] = TempHeatFluxContour(AllTemp*Tmax_min+Tref+273.15,TCCt,340,390,...
+%    709,36,997,dx*Lref,dz*Lref,nz,nx,x2d*Lref,z2d*Lref,TCsample,idx_Fig);
+% print(gcf,'-dpng',strcat(photosfile_name,'\','Fig.',num2str(idx_Fig-1),'.png'));
 %% Wavelet Transform for mold heat flux
 figure(idx_Fig);
 idx_Fig = idx_Fig +1;
